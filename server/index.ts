@@ -1,19 +1,22 @@
 import express from 'express';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import cors from 'cors';
-import * as bodyParser from 'body-parser';
-import * as dotenv from 'dotenv';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const PORT = process.env.PORT || 8000;
-const app = express();
-app.use(cors());
-const router = express.Router();
 
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+mongoose.connect(process.env.MONGO_URI);
+
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-router.get('/', (req, res) => {
-  res.render('Hello World!');
-});
-
-app.listen(PORT, () => console.log(`Server is working on ${PORT}`));
+app.listen(PORT, () => console.log(`Server is working on PORT:${PORT}`));
