@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./src/server.js",
   "author": "Maksim Kurdiumov",
   "license": "MIT",
   "repository": {
@@ -9,8 +9,8 @@
     "url": "git+https://github.com/ransoq/learn-words.git"
   },
   "scripts": {
-    "start": "node index.ts",
-    "start:watch": "nodemon index.ts",
+    "start": "node ./src/server.ts",
+    "start:watch": "nodemon ./src/server.ts",
     "build": "tsc",
     "lint": "eslint ./**/*.ts",
     "lint:fix": "eslint ./**/*.ts --fix"

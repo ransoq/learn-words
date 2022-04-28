@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-import IUser from "./User.type";
+import IUser from "./user.type";
 
 const UserSchema = new Schema<IUser>(
   {
@@ -22,10 +22,16 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: [true, "Email is required"],
     },
+    roles: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Role",
+      },
+    ],
   },
   { timestamps: true }
 );
 
-const UserModel = model<IUser>("Users", UserSchema);
+const UserModel = model<IUser>("User", UserSchema);
 
 export default UserModel;

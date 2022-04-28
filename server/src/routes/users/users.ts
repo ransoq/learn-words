@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 
 import validateRegisterInput from "validation/register/register";
 import validateLoginInput from "validation/login/login";
-import User from "models/User";
-import IUser from "models/User.type";
+import User from "models/user.model";
+import IUser from "models/user.type";
 
 const router = express.Router();
 
