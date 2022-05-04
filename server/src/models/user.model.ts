@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-import IUser from "./user.type";
+import { IUser } from "./user.type";
 
 const UserSchema = new Schema<IUser>(
   {
@@ -14,20 +14,10 @@ const UserSchema = new Schema<IUser>(
       max: [30, "Password must be less 30 characters, got {VALUE}"],
       required: [true, "Password is required"],
     },
-    confirmPassword: {
-      type: String,
-      required: [true, "Second password is required"],
-    },
     email: {
       type: String,
       required: [true, "Email is required"],
     },
-    roles: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Role",
-      },
-    ],
   },
   { timestamps: true }
 );

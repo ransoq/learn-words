@@ -1,7 +1,12 @@
-export default interface IUser {
+import { ObjectId } from "mongoose";
+
+export interface IUser {
   name: string;
   password: string;
-  confirmPassword: string;
   email: string;
-  roles: string[];
+  _id: ObjectId;
+}
+
+export interface IRegisterUser extends IUser {
+  confirmPassword: string;
 }
