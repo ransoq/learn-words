@@ -4,9 +4,9 @@ import { IUser } from "./user.type";
 
 const UserSchema = new Schema<IUser>(
   {
-    name: {
+    username: {
       type: String,
-      required: [true, "Name is required"],
+      required: [true, "Username is required"],
     },
     password: {
       type: String,
