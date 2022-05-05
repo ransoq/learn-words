@@ -3,12 +3,12 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-import User from "models/user.model";
-import { IUser } from "models/user.type";
+import User from "@models/user.model";
+import { IUser } from "@models/user.type";
 
 dotenv.config();
 
-export const login = async (req: Request, res: Response) => {
+const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
@@ -28,7 +28,7 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const register = async (req: Request, res: Response) => {
+const register = async (req: Request, res: Response) => {
   const { name, email, password, confirmPassword } = req.body;
 
   try {
@@ -48,3 +48,5 @@ export const register = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
+
+export { login, register };
