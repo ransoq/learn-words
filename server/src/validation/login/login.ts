@@ -1,5 +1,5 @@
 import Validator from "validator";
-import isEmpty from "is-empty";
+import isEmpty from "lodash.isempty";
 
 interface ILoginError {
   email?: string;
@@ -14,13 +14,15 @@ interface ILoginData {
 const validateLoginInput = (data: ILoginData) => {
   const errors: ILoginError = {};
 
-  if (Validator.isEmpty(data.email)) {
+  const { email, password } = data;
+
+  if (Validator.isEmpty(email)) {
     errors.email = "Email field is required";
-  } else if (!Validator.isEmail(data.email)) {
+  } else if (!Validator.isEmail(email)) {
     errors.email = "Email is invalid";
   }
 
-  if (Validator.isEmpty(data.password)) {
+  if (Validator.isEmpty(password)) {
     errors.password = "Password field is required";
   }
   return {

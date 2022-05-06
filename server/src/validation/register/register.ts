@@ -1,5 +1,5 @@
 import Validator from "validator";
-import isEmpty from "is-empty";
+import isEmpty from "lodash.isempty";
 
 interface IRegisterError {
   name?: string;
@@ -8,36 +8,30 @@ interface IRegisterError {
   confirmPassword?: string;
 }
 
-interface IRegisterData {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-const validateRegisterInput = (data: IRegisterData) => {
+const validateRegisterInput = (data) => {
   const errors: IRegisterError = {};
+  const { username, email, password, confirmPassword } = data;
 
-  if (Validator.isEmpty(data.name)) {
-    errors.name = "Name field is required";
+  if (Validator.isEmpty(username)) {
+    errors.name = "Username field is required";
   }
 
-  if (Validator.isEmpty(data.email)) {
+  if (Validator.isEmpty(email)) {
     errors.email = "Email field is required";
-  } else if (!Validator.isEmail(data.email)) {
+  } else if (!Validator.isEmail(email)) {
     errors.email = "Email is invalid";
   }
 
-  if (Validator.isEmpty(data.password)) {
+  if (Validator.isEmpty(password)) {
     errors.password = "Password field is required";
   }
-  if (Validator.isEmpty(data.confirmPassword)) {
+  if (Validator.isEmpty(confirmPassword)) {
     errors.confirmPassword = "Confirm password field is required";
   }
-  if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
+  if (!Validator.isLength(password, { min: 6, max: 30 })) {
     errors.password = "Password must be at least 6 characters, but less 30";
   }
-  if (!Validator.equals(data.password, data.confirmPassword)) {
+  if (!Validator.equals(password, confirmPassword)) {
     errors.confirmPassword = "Passwords don't match";
   }
 
