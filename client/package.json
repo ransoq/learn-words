@@ -1,0 +1,20 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/ransoq/learn-words",
+  "author": "Maksim",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack serve"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.72.0",
+    "webpack-dev-server": "^4.9.0",
+    "webpack-server": "^0.1.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.9.2"
+  }
+}

@@ -29,7 +29,7 @@
     "prettier/prettier": "error"
   },
   "ignorePatterns": [
-    "src/**/*.test.ts"
+    "./src/**/*.test.ts"
   ],
   "settings": {
     "import/resolver": {

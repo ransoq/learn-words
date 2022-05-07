@@ -1,27 +1,16 @@
-import { Schema, model } from "mongoose";
+import { prop, getModelForClass } from "@typegoose/typegoose";
 
-import { IUser } from "./user.type";
+class User {
+  @prop({ required: true })
+  public username!: string;
 
-const UserSchema = new Schema<IUser>(
-  {
-    name: {
-      type: String,
-      required: [true, "Name is required"],
-    },
-    password: {
-      type: String,
-      min: [6, "Password must be at least 6 characters, got {VALUE}"],
-      max: [30, "Password must be less 30 characters, got {VALUE}"],
-      required: [true, "Password is required"],
-    },
-    email: {
-      type: String,
-      required: [true, "Email is required"],
-    },
-  },
-  { timestamps: true }
-);
+  @prop({ required: true })
+  public password!: string;
 
-const UserModel = model<IUser>("User", UserSchema);
+  @prop({ required: true })
+  public email!: string;
+}
+
+const UserModel = getModelForClass(User, { schemaOptions: { timestamps: true } });
 
 export default UserModel;

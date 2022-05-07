@@ -1,30 +1,33 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
-import db from "./models";
+import userRouter from "@routes/users";
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 
 const app = express();
 
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/user", userRouter);
 
 app.get("/", (req, res) => {
   res.json("Hello World!");
 });
 
-app.listen(PORT, () => console.log(`Server is working on PORT:${PORT}`));
-
-db.mongoose
-  .connect(process.env.MONGO_URI!)
-  .then(() => {
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI!);
     console.log("Successfully connected to MongoDB.");
-  })
-  .catch((err) => {
-    console.error("Connection error", err);
+    app.listen(PORT, () => console.log(`Server is working on PORT:${PORT}`));
+  } catch (error) {
+    console.error("Connection error", error);
     process.exit();
-  });
+  }
+};
+
+startServer();
