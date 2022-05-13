@@ -1,8 +1,14 @@
-import React, { FC } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import App from "./components/App";
 
 import "./main.scss";
 
-const App: FC = () => <h1>My React and TypeScript App!</h1>;
-
-ReactDOM.hydrate(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);

@@ -10,7 +10,7 @@ import validateLoginInput from "../validation/login/login";
 dotenv.config();
 
 const login = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   const error = validateLoginInput(req.body);
 
@@ -19,7 +19,7 @@ const login = async (req: Request, res: Response) => {
   }
 
   try {
-    const user = await User.findOne({ username }).lean();
+    const user = await User.findOne({ email }).lean();
 
     if (!user) return res.status(404).json({ message: "User doesn't exist." });
 
@@ -47,7 +47,7 @@ const register = async (req: Request, res: Response) => {
 
   try {
     const user = await User.findOne({ email }).lean();
-    if (user) return res.status(404).json({ message: "User already exists." });
+    if (user) return res.status(400).json({ message: "User already exists." });
 
     if (password !== confirmPassword) return res.status(400).json({ message: "Password don't match" });
 

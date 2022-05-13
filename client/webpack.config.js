@@ -12,7 +12,11 @@ module.exports = {
     port: 3000,
   },
   resolve: {
-    modules: [__dirname, "src", "node_modules"],
+    alias: {
+      components: path.resolve(__dirname, "src/components"),
+      pages: path.resolve(__dirname, "src/pages"),
+    },
+    modules: [__dirname, "node_modules"],
     extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
   },
   module: {
@@ -50,7 +54,7 @@ module.exports = {
     }),
   ],
   output: {
-    filename: "bundle.[hash].js",
-    path: path.resolve(__dirname, "public"),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
 };
