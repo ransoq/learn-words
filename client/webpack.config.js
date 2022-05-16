@@ -37,7 +37,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-modules-typescript-loader"},
+          { loader: "css-loader", options: { modules: true } },
+          { loader: "sass-loader" }],
       },
       {
         test: /\.png|svg|jpg|gif$/,
