@@ -10,11 +10,13 @@ module.exports = {
     static: path.join(__dirname, "public"),
     compress: true,
     port: 3000,
+    historyApiFallback: true,
   },
   resolve: {
     alias: {
       components: path.resolve(__dirname, "src/components"),
       pages: path.resolve(__dirname, "src/pages"),
+      templates: path.resolve(__dirname, "src/templates"),
     },
     modules: [__dirname, "node_modules"],
     extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
@@ -39,12 +41,13 @@ module.exports = {
         test: /\.scss$/,
         use: [
           { loader: "style-loader" },
-          { loader: "css-modules-typescript-loader"},
+          { loader: "css-modules-typescript-loader" },
           { loader: "css-loader", options: { modules: true } },
-          { loader: "sass-loader" }],
+          { loader: "sass-loader" },
+        ],
       },
       {
-        test: /\.png|svg|jpg|gif$/,
+        test: /\.png|jpg|gif$/,
         use: ["file-loader"],
       },
     ],
@@ -58,7 +61,9 @@ module.exports = {
     }),
   ],
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
+    sourceMapFilename: "[name].js.map",
+    publicPath: "/",
   },
 };

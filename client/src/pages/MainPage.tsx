@@ -1,14 +1,13 @@
-import React, { FC } from "react";
+import React from "react";
 
-import Header from "components/Header";
-import Login from "components/Login";
+import Header from "components/Header/Header";
 
-const MainPage: FC = () => {
+const MainPage = () => {
   return (
     <>
       <Header />
       <main>
-        <Login />
+        <h1>Welcome!</h1>
       </main>
     </>
   );

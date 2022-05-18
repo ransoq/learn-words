@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 
 interface IFormInput {
-  name: string;
+  email: string;
   password: string;
 }
 
@@ -13,22 +13,26 @@ const Login = () => {
   const { control, handleSubmit } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log("TEST");
     try {
-      const response = axios.post("https://localhost:8000/login", data);
+      axios
+        .post("http://localhost:8000/user/login", data, {
+          withCredentials: true,
+        })
+        .then((res) => console.log(res, "response"));
     } catch (error: any) {
       throw new Error(error);
     }
-    console.log(data, "data");
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name="name"
+        name="email"
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <TextField label="Name" variant="outlined" required {...field} />
+          <TextField label="Email" variant="outlined" required {...field} />
         )}
       />
       <Controller
@@ -46,7 +50,7 @@ const Login = () => {
           />
         )}
       />
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" size="large">
         Login
       </Button>
     </form>

@@ -2,8 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
-import userRouter from "@routes/users";
+import userRouter from "@routes/users/users";
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
@@ -11,7 +12,8 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use("/user", userRouter);
 
