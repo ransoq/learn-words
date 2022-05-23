@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, Button, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import { useAppSelector } from "hooks/reduxHooks";
+
 const Header = () => {
-  const user = null;
+  const user = useAppSelector((state) => state.auth.user);
 
   return (
     <header>
@@ -25,7 +27,9 @@ const Header = () => {
           </Typography>
 
           {user ? (
-            <p>Maksim</p>
+            <Typography variant="subtitle1" component="p" sx={{ flexGrow: 0 }}>
+              {user.username}
+            </Typography>
           ) : (
             <Button color="inherit">
               <Link to="/login">Login</Link>

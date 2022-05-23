@@ -27,7 +27,7 @@ const login = async (req: Request, res: Response) => {
 
     if (!userPassword) return res.status(400).json({ message: "Invalid credentials." });
 
-    const token = jwt.sign({ email: user.email, id: user._id }, process.env.SECRET_KEY!, { expiresIn: "1h" });
+    const token = jwt.sign({ email: user.email, id: user._id }, process.env.SECRET_KEY!, { expiresIn: "24h" });
     const cookie = req.cookies.token;
 
     if (cookie === undefined) {
@@ -75,4 +75,14 @@ const register = async (req: Request, res: Response) => {
   }
 };
 
-export { login, register };
+const auth = async (req: Request, res: Response) => {
+  const { userId } = req;
+
+  const user = await User.findOne({ _id: userId });
+
+  if (!user) return res.status(404).json({ message: "User doesn't exist." });
+
+  res.status(200).json({ result: user, token: req.cookies.token });
+};
+
+export { login, register, auth };

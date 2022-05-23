@@ -17,10 +17,6 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use("/user", userRouter);
 
-app.get("/", (req, res) => {
-  res.json("Hello World!");
-});
-
 const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI!);

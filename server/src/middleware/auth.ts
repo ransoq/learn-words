@@ -6,7 +6,11 @@ dotenv.config();
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.headers.authorization?.split(" ")[1] || req.cookies.token;
+
+    if (!token) {
+      res.status(403).json({ message: "Token is undefined" });
+    }
 
     if (token) {
       const isCustomAuth = token.length < 500;
@@ -22,10 +26,11 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
 
         req.userId = decodedData?.sub as string;
       }
-    }
 
-    next();
+      next();
+    }
   } catch (error) {
+    res.status(403).json({ message: "Token is not valid" });
     console.log(error);
   }
 };
